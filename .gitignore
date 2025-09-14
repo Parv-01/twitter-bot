@@ -1,0 +1,54 @@
+#pycache/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+#Virtual environments
+
+.venv/
+venv/
+env/
+#Local environment and secrets
+
+.env
+.env.*
+!.env.example
+#Google OAuth and credentials (never commit)
+
+credentials.json
+base64 #for json in  64 for github action secret key
+*.yml #the github actions yml workaction testing
+#Logs and runtime artifacts
+
+*.log
+*.tmp
+*.bak
+#OS-specific files
+
+.DS_Store
+Thumbs.db
+#Editor/IDE folders
+
+.vscode/
+.idea/
+*.code-workspace
+#Build/packaging
+
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+#Coverage/test
+
+.coverage
+.tox/
+.pytest_cache/
+htmlcov/
+#Notebooks and checkpoints (if you use notebooks)
+
+.ipynb_checkpoints/
+#Local tools/config
+
+*.local
+*.cache/
