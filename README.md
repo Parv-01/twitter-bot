@@ -164,4 +164,4 @@ Open credentials.base64 and paste its content into the secret GOOGLE_CREDENTIALS
 
 ## License
 
-MIT © Parv Agarwal
+GNU GPLv3 © Parv Agarwal
