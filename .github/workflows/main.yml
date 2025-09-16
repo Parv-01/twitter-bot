@@ -1,51 +1,50 @@
 name: Daily Twitter Bot
 
 on:
-schedule:
-- cron: '0 08 * * *' # Runs every day at 1:00 pm ist
-workflow_dispatch: # Allows manual triggering from the GitHub Actions UI
+  schedule:
+    - cron: '0 8 * * *' # Runs every day at 8:00 am UTC
+  workflow_dispatch: # Allows manual triggering from the GitHub Actions UI
 
 jobs:
-tweet:
-runs-on: ubuntu-latest
+  tweet:
+    runs-on: ubuntu-latest
 
-permissions:
-  contents: write # Needed to commit the state file
+    permissions:
+      contents: write # Needed to commit the state file
 
-steps:
-  - name: Checkout repository
-    uses: actions/checkout@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-  - name: Set up Python 3.10
-    uses: actions/setup-python@v5
-    with:
-      python-version: '3.10'
-      cache: 'pip'
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
 
-  - name: Install dependencies
-    run: |
-      pip install --upgrade pip
-      pip install -r requirements.txt
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
 
-  - name: Create Google Credentials File
-    run: |
-      echo "${{ secrets.GOOGLE_CREDENTIALS_BASE64 }}" | base64 --decode > credentials.json
-    shell: bash
+      - name: Create Google Credentials File
+        run: |
+          echo "${{ secrets.GOOGLE_CREDENTIALS_BASE64 }}" | base64 --decode > credentials.json
+        shell: bash
 
-  - name: Run Twitter Bot
-    env:
-      DOC_ID: ${{ secrets.DOC_ID }}
-      X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
-      X_API_KEY: ${{ secrets.X_API_KEY }}
-      X_API_SECRET: ${{ secrets.X_API_SECRET }}
-      X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
-      X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
-      X_CLIENT_ID: ${{ secrets.X_CLIENT_ID }}
-      X_CLIENT_SECRET: ${{ secrets.X_CLIENT_SECRET }}
-    run: |
-      python main.py
+      - name: Run Twitter Bot
+        env:
+          DOC_ID: ${{ secrets.DOC_ID }}
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+          X_CLIENT_ID: ${{ secrets.X_CLIENT_ID }}
+          X_CLIENT_SECRET: ${{ secrets.X_CLIENT_SECRET }}
+        run: python main.py
 
-  - name: Commit state file
-    uses: stefanzweig/git-auto-commit-action@v5
-    with:
-      commit_message: "chore: update last posted thread ID"
+      - name: Commit state file
+        uses: stefanzweig/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update last posted thread ID"
