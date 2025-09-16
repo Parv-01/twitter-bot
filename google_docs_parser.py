@@ -51,13 +51,13 @@ class GoogleDocsParser:
             )
             tweet_texts = [t.strip() for t in tweet_texts if t.strip()]
 
-            if len(tweet_texts) == 5:
+            if 0 < len(tweet_texts) <= 5:
                 threads.append({
                     'thread_id': thread_id,
                     'tweets': tweet_texts
                 })
             else:
                 print(
-                    f"Warning: Thread '{thread_id}' does not have exactly 5 tweets. Found {len(tweet_texts)}. Skipping.")
+                    f"Warning: Thread '{thread_id}' has {len(tweet_texts)} tweets. Skipping because it's empty or exceeds the limit of 5.")
 
         return threads
