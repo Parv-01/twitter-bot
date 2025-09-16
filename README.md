@@ -62,6 +62,11 @@ twitter-thread-bot/
 3) bot.py  
 - Loads environment, reads the doc, parses threads, and posts sequentially.
 
+4) State Management
+
+- The bot tracks its progress by saving the ID of the last posted thread in a file named last_posted_thread.txt.
+- After a successful run, the git-auto-commit-action automatically commits this updated file back to the repository.
+- This ensures that the bot's state is persistent across workflow runs.
 ---
 
 ## Setup
@@ -143,6 +148,10 @@ Create the Base64 content locally:
 ```
 base64 credentials.json > credentials.base64
 Open credentials.base64 and paste its content into the secret GOOGLE_CREDENTIALS_BASE64
+On Windows (Powershell) run this code
+```
+[System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes("credentials.json"))
+```
 ```
 
 ## Extending the Bot
