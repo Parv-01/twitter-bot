@@ -1,38 +1,36 @@
 import os
 import re
-import dotenv
 import time
 from google_docs_parser import GoogleDocsParser
 from twitter_client import TwitterClient
 
 def get_last_posted_thread_id():
+    """Reads the ID of the last posted thread from a state file."""
     try:
         with open("last_posted_thread.txt", "r") as f:
             return f.read().strip()
     except FileNotFoundError:
+        print("State file 'last_posted_thread.txt' not found. This is expected on the first run.")
         return None
     except Exception as e:
-        print(f"Error reading last posted ID file: {e}")
+        print(f"An unexpected error occurred while reading the state file: {e}")
         return None
 
 def update_last_posted_thread_id(thread_id):
-
+    """Updates the state file with the ID of the newly posted thread."""
     try:
         with open("last_posted_thread.txt", "w") as f:
             f.write(thread_id)
+        print("Successfully updated the last posted thread ID.")
     except Exception as e:
-        print(f"Error writing to last posted ID file: {e}")
-
+        print(f"Failed to write to the state file: {e}")
 
 def run_bot():
-
-    dotenv.load_dotenv()
-    print("Running locally. Loading environment variables from .env file...")
-
+    """Main function to fetch content, select a thread, and post to Twitter."""
     try:
         doc_id = os.environ.get("DOC_ID")
         if not doc_id:
-            raise ValueError("DOC_ID not found in environment variables.")
+            raise ValueError("DOC_ID not found in environment variables. Please check your GitHub Secrets.")
 
         print("Connecting to Google Docs and parsing content...")
         docs_parser = GoogleDocsParser()
@@ -44,9 +42,7 @@ def run_bot():
             return
 
         print(f"Found {len(tweet_threads)} valid tweet threads.")
-
         last_posted_thread_id = get_last_posted_thread_id()
-
         thread_to_post = None
 
         if last_posted_thread_id:
@@ -58,7 +54,6 @@ def run_bot():
             except ValueError:
                 print("Last posted thread not found in the document. Posting the first thread.")
                 thread_to_post = tweet_threads[0]
-
         else:
             print("No previous post found. Posting the first thread.")
             thread_to_post = tweet_threads[0]
@@ -68,16 +63,16 @@ def run_bot():
             return
 
         print(f"Selected thread to post: {thread_to_post['thread_id']}")
-
         x_client = TwitterClient()
         x_client.post_tweet_thread(thread_to_post['tweets'])
 
         update_last_posted_thread_id(thread_to_post['thread_id'])
 
-        print("Successfully posted thread and updated bot state.")
+        print("Bot run completed.")
 
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"An unexpected error occurred during bot execution: {e}")
+        raise
 
 if __name__ == "__main__":
     run_bot()
