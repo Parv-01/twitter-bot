@@ -3,16 +3,15 @@ name: Daily Twitter Bot
 on:
   schedule:
     # Runs every day at 8:00 am UTC
-    # Adjust the cron schedule as needed (e.g., '0 1 * * *' for 1:00 am UTC)
     - cron: '0 8 * * *'
-  workflow_dispatch: # Allows manual triggering from the GitHub Actions UI
+  workflow_dispatch:
 
 jobs:
   tweet:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write # Needed to commit the state file
+      contents: write
 
     steps:
       - name: Checkout repository
