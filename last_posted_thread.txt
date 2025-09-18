@@ -1,1 +1,1 @@
-WEEK 1: PROGRAMMING FUNDAMENTALS DAY 1 - Python Setup & Basics
+DAY 2 - Control Structures
