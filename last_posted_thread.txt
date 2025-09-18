@@ -1,1 +1,1 @@
-Lorem Ipsum Dorem Test 2
+WEEK 1: PROGRAMMING FUNDAMENTALS DAY 1 - Python Setup & Basics
