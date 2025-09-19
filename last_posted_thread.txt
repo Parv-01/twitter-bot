@@ -1,1 +1,1 @@
-DAY 4 - Data Structures - Lists & Tuples
+Day 3: Learn function definition, parameters, and return values.
