@@ -1,1 +1,1 @@
-DAY 5 - Dictionaries & Sets
+DAY 6 - String Manipulation & File Handling
