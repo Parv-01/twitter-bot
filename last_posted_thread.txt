@@ -1,1 +1,1 @@
-DAY 17 - Advanced Database Operations
+DAY 18 - NoSQL & Modern Databases
