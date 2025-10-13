@@ -1,1 +1,1 @@
-DAY 24 - Hash Tables & Graphs
+DAY 25 - Dynamic Programming
