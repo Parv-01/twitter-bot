@@ -1,1 +1,1 @@
-DAY 25 - Dynamic Programming
+DAY 26 - System Design Basics
