@@ -1,1 +1,1 @@
-DAY 26 - System Design Basics
+DAY 27 - Machine Learning Basics
