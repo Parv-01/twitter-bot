@@ -1,1 +1,1 @@
-WEEK 5: AI/ML FOUNDATIONS DAY 29 - ML Fundamentals with scikit-learn
+WEEK 12: SECURITY & TRUSTWORTHY SOFTWARE DAY 78 - Threat Modeling & SDL
