@@ -1,1 +1,1 @@
-WEEK 14: NLP SYSTEMS & LLMs DAY 92 - CS224N Orientation & Trends
+WEEK 14: NLP SYSTEMS & LLMs DAY 93 - Embeddings & Classical Pipelines
