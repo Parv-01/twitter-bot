@@ -2,14 +2,12 @@ name: Daily Twitter Bot
 
 on:
   schedule:
-    # Runs every day at 8:00 am UTC
-    - cron: '0 8 * * *'
+    - cron: '0 8 * * *'   # every day at 8:00 AM UTC
   workflow_dispatch:
 
 jobs:
   tweet:
     runs-on: ubuntu-latest
-
     permissions:
       contents: write
 
@@ -36,17 +34,19 @@ jobs:
       - name: Run Twitter Bot
         env:
           DOC_ID: ${{ secrets.DOC_ID }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/credentials.json
           X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
           X_API_KEY: ${{ secrets.X_API_KEY }}
           X_API_SECRET: ${{ secrets.X_API_SECRET }}
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
-          X_CLIENT_ID: ${{ secrets.X_CLIENT_ID }}
-          X_CLIENT_SECRET: ${{ secrets.X_CLIENT_SECRET }}
         run: |
+          echo "🚀 Starting bot run at $(date)"
           python main.py
+          echo "✅ Bot run completed at $(date)"
 
       - name: Commit state file
         uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: "chore: update last posted thread ID"
+          file_pattern: last_posted_thread.txt
