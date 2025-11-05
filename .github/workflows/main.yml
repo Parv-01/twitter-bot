@@ -1,9 +1,9 @@
 name: Daily Twitter Bot
 
-on:
-  schedule:
-    - cron: '0 8 * * *'   # every day at 8:00 AM UTC
-  workflow_dispatch:
+#on:
+#  schedule:
+   # - cron: '0 8 * * *'   # every day at 8:00 AM UTC
+#  workflow_dispatch:
 
 jobs:
   tweet:
